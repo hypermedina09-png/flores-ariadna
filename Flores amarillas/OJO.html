@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ariadna 💛</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background: radial-gradient(circle,#0f2027,#000);
+  overflow:hidden;
+  font-family:sans-serif;
+  color:white;
+}
+
+/* Pantalla inicio */
+#inicio{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:black;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:26px;
+  z-index:999;
+  cursor:pointer;
+}
+
+/* Estrellas */
+.estrella{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:brillar 2s infinite alternate;
+}
+@keyframes brillar{
+  from{opacity:0.2;}
+  to{opacity:1;}
+}
+
+/* Nombre */
+.nombre{
+  position:absolute;
+  top:10%;
+  width:100%;
+  text-align:center;
+  font-size:45px;
+  opacity:0;
+  animation:aparecer 3s forwards 2s;
+}
+@keyframes aparecer{
+  to{opacity:1;text-shadow:0 0 25px pink;}
+}
+
+/* Mensaje */
+.mensaje{
+  position:absolute;
+  top:20%;
+  width:100%;
+  text-align:center;
+  font-size:24px;
+  opacity:0;
+  animation:aparecer 3s forwards 4s;
+}
+
+/* RAMO */
+.ramo{
+  position:absolute;
+  bottom:8%;
+  left:50%;
+  transform:translateX(-50%);
+  width:240px;
+  height:300px;
+  opacity:0;
+  animation:aparecer 3s forwards 6s, flotar 5s infinite ease-in-out;
+}
+
+@keyframes flotar{
+  50%{transform:translateX(-50%) translateY(-10px);}
+}
+
+/* FLORES */
+.flor{
+  position:absolute;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  background: radial-gradient(circle, #ffcc00 40%, #ffd700 70%);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.flor::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  box-shadow:
+    0 -20px yellow,
+    20px 0 yellow,
+    -20px 0 yellow,
+    0 20px yellow,
+    14px 14px yellow,
+    -14px -14px yellow,
+    14px -14px yellow,
+    -14px 14px yellow;
+}
+
+.flor::after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:30px;
+  background: radial-gradient(circle, orange, #cc7000);
+  border-radius:50%;
+  top:20px;
+  left:20px;
+}
+
+/* POSICIONES */
+.f1{ top:0; left:85px;}
+.f2{ top:50px; left:10px;}
+.f3{ top:50px; right:10px;}
+.f4{ top:100px; left:60px;}
+.f5{ top:100px; right:60px;}
+
+/* HOJAS */
+.hojas{
+  position:absolute;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  width:120px;
+  height:80px;
+  background: radial-gradient(circle, #2ecc71, #145a32);
+  border-radius:50%;
+  opacity:0.8;
+}
+
+/* TALLOS */
+.tallos{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:170px;
+  background:linear-gradient(green,#145a32);
+  box-shadow:
+    -15px 0 green,
+    15px 0 green,
+    -30px 30px green,
+    30px 30px green;
+}
+
+/* ENVOLTURA */
+.envoltura{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:200px;
+  height:140px;
+  background:linear-gradient(135deg,#ff9ecf,#ff4da6);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  box-shadow:0 0 20px rgba(255,105,180,0.6);
+}
+
+.envoltura::after{
+  content:"✨";
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  animation:brillo 1.5s infinite alternate;
+}
+
+@keyframes brillo{
+  from{opacity:0.3;}
+  to{opacity:1;}
+}
+
+/* Corazones */
+.corazon{
+  position:absolute;
+  color:#ff4d6d;
+  font-size:20px;
+  animation:subir 3s linear forwards;
+}
+@keyframes subir{
+  to{transform:translateY(-200px);opacity:0;}
+}
+
+/* Pétalos */
+.petalo-caida{
+  position:absolute;
+  width:10px;height:10px;
+  background:yellow;border-radius:50%;
+  animation:caer linear infinite;
+}
+@keyframes caer{
+  to{transform:translateY(110vh);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="inicio">💛 Toca para comenzar 💛</div>
+
+<div class="nombre">💖 Ariadna 💖</div>
+<div class="mensaje">🌼 Estas son para ti, espero que te guste 💛</div>
+
+<div class="ramo">
+  <div class="flor f1"></div>
+  <div class="flor f2"></div>
+  <div class="flor f3"></div>
+  <div class="flor f4"></div>
+  <div class="flor f5"></div>
+  <div class="hojas"></div>
+  <div class="tallos"></div>
+  <div class="envoltura"></div>
+</div>
+
+<audio id="musica" loop>
+  <source src="perfect.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let audio=document.getElementById("musica");
+audio.volume=0;
+
+// estrellas
+for(let i=0;i<100;i++){
+  let e=document.createElement("div");
+  e.className="estrella";
+  e.style.left=Math.random()*100+"vw";
+  e.style.top=Math.random()*100+"vh";
+  document.body.appendChild(e);
+}
+
+document.getElementById("inicio").addEventListener("click",()=>{
+  document.getElementById("inicio").style.display="none";
+  audio.play();
+
+  // voz
+  let voz=new SpeechSynthesisUtterance("Ariadna");
+  voz.lang="es-ES";
+  speechSynthesis.speak(voz);
+
+  // volumen progresivo
+  let v=0;
+  let subir=setInterval(()=>{
+    if(v<1){v+=0.05;audio.volume=v;}
+    else clearInterval(subir);
+  },200);
+
+  // corazones
+  setInterval(()=>{
+    let c=document.createElement("div");
+    c.className="corazon";
+    c.innerHTML="💖";
+    c.style.left=Math.random()*100+"vw";
+    c.style.top="80vh";
+    document.body.appendChild(c);
+  },400);
+});
+
+// pétalos
+for(let i=0;i<70;i++){
+  let p=document.createElement("div");
+  p.className="petalo-caida";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(4+Math.random()*6)+"s";
+  document.body.appendChild(p);
+}
+</script>
+
+</body>
+</html>
